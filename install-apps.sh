@@ -15,6 +15,13 @@ flatpak install flathub com.spotify.Client -y || echo "ERROR: Failed to install 
 flatpak install flathub com.vscodium.codium -y || echo "ERROR: Failed to install com.vscodium.codium"
 flatpak install flathub net.cozic.joplin_desktop -y || echo "ERROR: Failed to install net.cozic.joplin_desktop"
 flatpak install flathub org.videolan.VLC -y || echo "ERROR: Failed to install org.videolan.VLC"
+flatpak install flathub io.freetubeapp.FreeTube -y || echo "ERROR: Failed to install io.freetubeapp.FreeTube"
+flatpak install flathub org.signal.Signal -y || echo "ERROR: Failed to install org.signal.Signal"
+flatpak install flathub net.codelogistics.webapps -y || echo "ERROR: Failed to install net.codelogistics.webapps"
+flatpak install flathub com.brave.Browser -y || echo "ERROR: Failed to install com.brave.Browser"
+flatpak install flathub com.obsproject.Studio -y || echo "ERROR: Failed to install com.obsproject.Studio"
+flatpak install flathub io.missioncenter.MissionCenter -y || echo "ERROR: Failed to install io.missioncenter.MissionCenter"
+flatpak install flathub com.github.johnfactotum.Foliate -y || echo "ERROR: Failed to install com.github.johnfactum.Foliate"
 
 echo "Flatpaks installed, continuing with ProtonVPN"
 echo "Starting ProtonVPN installation..."
