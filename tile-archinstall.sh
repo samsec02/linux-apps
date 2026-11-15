@@ -843,7 +843,8 @@ ln -sfn "themes/$new"      "$CFG/mako/config"
 if [[ "$new" == dark ]]; then
   scheme=prefer-dark;  gtk=Adwaita-dark; icons=Papirus-Dark; preferdark=1
 else
-  scheme=prefer-light; gtk=Adwaita;      icons=Papirus;      preferdark=0
+  # Papirus-Light = dark tray icons (Wi-Fi, Bluetooth...) for the light bar
+  scheme=prefer-light; gtk=Adwaita;      icons=Papirus-Light; preferdark=0
 fi
 gsettings set org.gnome.desktop.interface color-scheme "$scheme"
 gsettings set org.gnome.desktop.interface gtk-theme "$gtk"
@@ -865,6 +866,13 @@ setsid -f swaybg -i "/usr/share/backgrounds/tile/$new.png" -m fill >/dev/null 2>
 pkill -SIGUSR2 -x waybar          # bar
 pkill -SIGUSR1 -x kitty           # terminal colors
 makoctl reload 2>/dev/null        # notifications
+# Tray apps: restart so their Wi-Fi / Bluetooth icons redraw in the new theme
+if pgrep -x nm-applet >/dev/null; then
+  pkill -x nm-applet; setsid -f nm-applet --indicator >/dev/null 2>&1
+fi
+if pgrep -f blueman-applet >/dev/null; then
+  pkill -f blueman-applet; setsid -f blueman-applet >/dev/null 2>&1
+fi
 hyprctl reload >/dev/null 2>&1    # window borders
 notify-send -t 2000 "Tile" "${new^} mode"
 EOF
